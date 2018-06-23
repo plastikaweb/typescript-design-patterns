@@ -1,53 +1,34 @@
-class Lights {
-  dim() {
-    console.log('Lights are dimming...');
-  }
-}
+import { BlueRay } from './blue-ray';
+import { Tv } from './tv';
+import { Lights } from './lights';
+import { PopCorner } from './pop-corner';
+import { Amplifier } from './amplifier';
 
-class Tv {
-  turOn() {
-    console.log('TV turning on...');
-  }
-  turOff() {
-    console.log('TV turning off...');
-  }
-}
+export class HomeTheaterFacade {
 
-class PopCorner {
-  turOn() {
-    console.log('Pop corner turning on...');
-  }
-  turOff() {
-    console.log('Pop corner turning off...');
-  }
-  pop() {
-    console.log('Popping corn!');
-  }
-}
+  constructor(
+    private amplifier: Amplifier,
+    private blueRay: BlueRay,
+    private tv: Tv,
+    private lights: Lights,
+    private popCorner: PopCorner) { }
 
-class Amplifier {
-  on() {
-    console.log('Amp is turning on...');
-  }
-  off() {
-    console.log('Amp is turning off...');
-  }
-  setSource(source: string) {
-    console.log(`setting source to ${source}`);
-  }
-  setVolume(volume: number) {
-    console.log(`setting the volume to ${volume}`);
-  }
-}
+    watchMovie() {
+      this.popCorner.turOn();
+      this.popCorner.pop();
+      this.lights.dim();
+      this.tv.turOn();
+      this.amplifier.on();
+      this.amplifier.setSource('blue ray');
+      this.amplifier.setVolume(7);
+      this.blueRay.turOn();
+      this.blueRay.play();
+    }
 
-class BlueRay {
-  turOn() {
-    console.log('BlueRay turning on...');
-  }
-  turOff() {
-    console.log('BlueRay turning off...');
-  }
-  play() {
-    console.log('BlueRay playing...');
-  }
+    endMovie() {
+      this.popCorner.turOff();
+      this.amplifier.off();
+      this.tv.turOff();
+      this.blueRay.turOff();
+    }
 }

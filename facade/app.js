@@ -1,0 +1,16 @@
+"use strict";
+exports.__esModule = true;
+var blue_ray_1 = require("./blue-ray");
+var tv_1 = require("./tv");
+var amplifier_1 = require("./amplifier");
+var pop_corner_1 = require("./pop-corner");
+var lights_1 = require("./lights");
+var facade_1 = require("./facade");
+var blueray = new blue_ray_1.BlueRay();
+var tv = new tv_1.Tv();
+var amplifier = new amplifier_1.Amplifier();
+var popCorner = new pop_corner_1.PopCorner();
+var lights = new lights_1.Lights();
+var homeTheater = new facade_1.HomeTheaterFacade(amplifier, blueray, tv, lights, popCorner);
+homeTheater.watchMovie();
+homeTheater.endMovie();
