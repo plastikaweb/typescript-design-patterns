@@ -1,38 +1,7 @@
-interface Subject {
-  registerObserver(o: Observer);
-  removeObserver(o: Observer);
-  notifyObservers();
-}
+import { Subject, Observer } from './models';
+import { WeatherStation } from './subject';
 
-interface Observer {
-  update(temperature: number);
-}
-
-// main subject
-class WeatherStation implements Subject {
-  private temperature: number;
-  private observers: Observer[] = [];
-
-  registerObserver(o: Observer) {
-    this.observers.push(o);
-  }
-  removeObserver(o: Observer) {
-    this.observers = this.observers.filter(ob => ob !== o);
-  }
-  notifyObservers() {
-    this.observers.forEach(o => {
-      o.update(this.temperature);
-    });
-  }
-
-  setTemperature(temperature: number) {
-    this.temperature = temperature;
-    this.notifyObservers();
-  }
-}
-
-// observers
-class TemperatureDisplay1 implements Observer {
+export class TemperatureDisplay1 implements Observer {
   private subject: Subject;
 
   constructor(private weatherStation: WeatherStation) {
@@ -44,7 +13,7 @@ class TemperatureDisplay1 implements Observer {
   }
 
 }
-class Fan implements Observer {
+export class Fan implements Observer {
   private subject: Subject;
 
   constructor(private weatherStation: WeatherStation) {
@@ -60,12 +29,3 @@ class Fan implements Observer {
   }
 
 }
-
-// instances - observable / subject
-const weatherStattion = new WeatherStation();
-// instances - observers
-const display = new TemperatureDisplay1(weatherStattion);
-const fan = new Fan(weatherStattion);
-
-weatherStattion.setTemperature(20);
-weatherStattion.setTemperature(40);
