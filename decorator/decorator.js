@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -8,45 +9,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var Car = /** @class */ (function () {
-    function Car() {
-    }
-    Car.prototype.getDescription = function () {
-        return this.description;
-    };
-    return Car;
-}());
-var CarOne = /** @class */ (function (_super) {
-    __extends(CarOne, _super);
-    function CarOne() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.description = 'Car One';
-        return _this;
-    }
-    CarOne.prototype.cost = function () {
-        return 12000;
-    };
-    return CarOne;
-}(Car));
-var CarTwo = /** @class */ (function (_super) {
-    __extends(CarTwo, _super);
-    function CarTwo() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.description = 'Car Two';
-        return _this;
-    }
-    CarTwo.prototype.cost = function () {
-        return 21000;
-    };
-    return CarTwo;
-}(Car));
+exports.__esModule = true;
+var car_1 = require("./car");
+// Abstract Decorator
 var CarOptions = /** @class */ (function (_super) {
     __extends(CarOptions, _super);
     function CarOptions() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     return CarOptions;
-}(Car));
+}(car_1.Car));
+// Decorator 1
 var EnhancedAutoPilot = /** @class */ (function (_super) {
     __extends(EnhancedAutoPilot, _super);
     function EnhancedAutoPilot(car) {
@@ -62,6 +35,8 @@ var EnhancedAutoPilot = /** @class */ (function (_super) {
     };
     return EnhancedAutoPilot;
 }(CarOptions));
+exports.EnhancedAutoPilot = EnhancedAutoPilot;
+// Decorator 2
 var Wifi = /** @class */ (function (_super) {
     __extends(Wifi, _super);
     function Wifi(car) {
@@ -77,10 +52,4 @@ var Wifi = /** @class */ (function (_super) {
     };
     return Wifi;
 }(CarOptions));
-var myFerrari = new CarOne();
-myFerrari = new Wifi(myFerrari);
-console.log(myFerrari.cost());
-console.log(myFerrari.getDescription());
-myFerrari = new EnhancedAutoPilot(myFerrari);
-console.log(myFerrari.cost());
-console.log(myFerrari.getDescription());
+exports.Wifi = Wifi;
